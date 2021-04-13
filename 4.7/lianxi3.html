@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript如何在浏览器端操作cookie（读、写）
+    </title>
+</head>
+<body>
+    <label>cookie名：</label><input id="cookie_key" type="text"  /> <br/>
+    <label>cookie值：</label><input id="cookie_val" type="text"  /> <br/>
+    <label>失效时间：</label><input id="cookie_time"  type="text" title="时间格式（10s,2m等）" /> <br/> <br/>
+    <input type="button" value="添加cookie"  onClick ="addCookieFun()"/> &nbsp; &nbsp;
+    <input type="button" value="检查cookie"  onClick ="chkCookieFun()"/>  &nbsp; &nbsp;
+    <input type="button" value="删除cookie"  onClick ="delCookieFun()"/>  &nbsp; &nbsp;
+</body>
+</html>
+<script>
+      //添加cookie
+      var addCookie = function (name, value, time) {
+        var strSec = getSec(time);
+        var exp = new Date();
+        exp.setTime(exp.getTime() + strSec * 1);    
+        //设置cookie的名称、值、失效时间
+        document.cookie = name + "=" + value + ";expires="+ exp.toGMTString();  
+    }
+     //获取
+       //获取cookie
+    var getCookie = function (name) {
+        //获取当前所有cookie
+        var strCookies = document.cookie;
+        //截取变成cookie数组
+        var array = strCookies.split(';');
+        //循环每个cookie
+        for (var i = 0; i < array.length; i++) {
+            //将cookie截取成两部分
+            var item = array[i].split("=");
+            //判断cookie的name 是否相等
+            if (item[0] == name) {
+                return item[1];
+            }
+        }
+        return null;
+    }
+    //删除
+    
+   //删除cookie
+   var delCookie = function (name) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        //获取cookie是否存在
+        var value = getCookie(name);
+        if (value != null) {
+            document.cookie = name + "=" + value + ";expires="+ exp.toUTCString();
+        }
+    }
+ //获取时间的秒数（参数：d，h,m,s） 12m
+ var getSec = function(str){
+        var str1 = str.substr(0, str.length - 1);  //时间数值 
+        var str2 = str.substr(str.length-1, 1);    //时间单位
+        if (str2 == "s") {
+            return str1 * 1000;
+        }
+        else if (str2 == "m") {
+            return str1 * 60 * 1000;
+        }
+        else if (str2 == "h") {
+            return str1 * 60 * 60 * 1000;
+        }
+        else if (str2 == "d") {
+            return str1 * 24 * 60 * 60 * 1000;
+        }
+    }
+    var addCookieFun = function(){
+        var cookie_key = document.getElementById("cookie_key").value;
+        var cookie_val = document.getElementById("cookie_val").value;
+        var cookie_time = document.getElementById("cookie_time").value;    
+        addCookie(cookie_key,cookie_val,cookie_time);    
+        alert("添加cookie："+ cookie_key);
+    }
+    
+    var chkCookieFun = function(){
+        var cookie_key = document.getElementById("cookie_key").value;
+        var result = getCookie(cookie_key);
+        if(result!=null){
+            alert("存在cookie:"+ cookie_key);    
+        }else{
+            alert("不存在cookie:"+cookie_key);    
+        }
+    }
+    
+    var delCookieFun = function(){
+        var cookie_key = document.getElementById("cookie_key").value;
+        delCookie(cookie_key);
+        alert("删除cookie："+ cookie_key);
+    }
+</script>

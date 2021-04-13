@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Object.getPrototypeOf()
+        // Object.getPrototypeOf方法返回参数对象的原型。这是获取原型对象的标准方法。
+
+        // //声明一个构造函数
+        // function Person(){}
+        // //通过构造函数创建一个对象、
+        // var p1 = new Person();
+        // // 获取实例的原型
+        // var proto = Object.getPrototypeOf(p1);
+        // console.log(proto);
+        // console.log(Person.prototype);
+        // //实例的原型就是实例的构造函数的原型
+        // console.log(proto===Person.prototype);
+        // //空对象的原型是  Object.prototype
+        // Object.getPrototypeOf({})===Object.prototype//true
+        // //Object.prototype的原型是null
+        // Object.getPrototypeOf(Object.prototype)===null//true
+
+        // var F = function(){};
+        // var f = new F();  f的原型 =  F.prototype。
+        // document.write( Object.getPrototypeOf(f) === F.prototype);  //true
+        // 空对象的原型是 Object.prototype
+        // document.write(Object.getPrototypeOf({}) === Object.prototype )// true
+        // Object.prototype 的原型是 null
+        //   document.write( Object.getPrototypeOf(Object.prototype) === null) // true
+        // 函数的原型是 Function.prototype
+        // function f() { }
+        //  document.write( Object.getPrototypeOf(f) === Function.prototype) // true
+
+
+
+        // Object.setPrototypeOf()
+        // Object.setPrototypeOf方法为参数对象设置原型，返回该参数对象。它接受两个参数，第一个是现有对象，第二个是原型对象。
+        // var a = {};
+        // var b = { x: 1 };
+        // document.write( Object.setPrototypeOf(a, b))//[object Object]t
+        // document.write( Object.getPrototypeOf(a) === b) // true
+        // document.write( a.x) // 1
+
+
+
+        // new命令可以使用Object.setPrototypeOf方法模拟。
+        // var F = function () {
+        //     this.foo = 'bar';
+        // };
+        // var f = new F();
+        // // 等同于
+        // var f = Object.setPrototypeOf({}, F.prototype);
+        // F.call(f);
+
+
+
+        // Object.create() 
+        // 原型对象
+        // 1 var A = {
+        //     print: function () {
+        //         console.log('hello');
+        //     }
+        // };
+        // // 实例对象
+        // var B = Object.create(A);
+        // Object.getPrototypeOf(B) === A // true
+        // B.print() // hello
+        // B.print === A.print // true
+
+        // 2实际上，Object.create()方法可以用下面的代码代替
+        // if (typeof Object.create !== 'function') {
+        //     Object.create = function (obj) {
+        //         function F() { }
+        //         F.prototype = obj;
+        //         return new F();
+        //     };
+        // }
+
+        //    3.
+        // var obj1 = Object.create({});
+        // var obj2 = Object.create(Object.prototype);
+        // var obj3 = new Object();
+
+
+
+        // Object.prototype.isPrototypeOf()
+        // var o1 = {};
+        // var o2 = Object.create(o1);
+        // var o3 = Object.create(o2);
+        // o2.isPrototypeOf(o3) // true
+        // o1.isPrototypeOf(o3) // true
+
+
+
+        // Object.prototype.__proto__
+        // var obj = {};
+        // var p = {};
+        // obj.__proto__ = p;
+        // Object.getPrototypeOf(obj) === p // true
+
+        // var A = {
+        //     name: '张三'
+        // };
+        // var B = {
+        //     name: '李四'
+        // };
+        // var proto = {
+        //     print: function () {
+        //         console.log(this.name);
+        //     }
+        // };
+        // A.__proto__ = proto;
+        // B.__proto__ = proto;
+
+        // A.print() // 张三
+        // B.print() // 李四
+
+        // A.print === B.print // true
+        // A.print === proto.print // true
+        // B.print === proto.print // true
+
+
+
+        // 获取原型对象方法的比较
+        // __proto__属性指向当前对象的原型对象，即构造函数的prototype属性。
+        // var obj = new Object();
+        // obj.__proto__ === Object.prototype// true
+        // obj.__proto__ === obj.constructor.prototype// true
+
+
+
+        // Object.getOwnPropertyNames()
+        // Object.getOwnPropertyNames(Date)
+        // ["parse", "arguments", "UTC", "caller", "name", "prototype", "now", "length"
+
+
+
+        //    Object.prototype.hasOwnProperty()
+        // Date.hasOwnProperty('length') // true
+        // Date.hasOwnProperty('toString') // false
+
+
+
+
+        // in 运算符和 for...in 循环
+        // in运算符返回一个布尔值，表示一个对象是否具有某个属性。它不区分该属性是对象自身的属性，还是继承的属性。
+
+        // 'length' in Date // true
+        // 'toString' in Date // true
+        // in运算符常用于检查一个属性是否存在。
+        // 获得对象的所有可遍历属性（不管是自身的还是继承的），可以使用for...in循环。
+        var o1 = { p1: 123 };
+        var o2 = Object.create(o1, {
+            p2: { value: "abc", enumerable: true }
+        });
+        for (p in o2) {
+            console.info(p);
+        }
+
+
+    </script>
+</body>
+
+</html>

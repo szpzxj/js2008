@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 将函数作为值返回
+
+
+
+    /******函数声明********/
+    // // function关键字
+    // // 声明
+    // function abc(){
+    // }
+    // // 调用
+    // abc()
+
+
+
+    /******函数表达式*****/
+    //  // 匿名函数 ：没有名称的函数
+    // //  声明
+    // var fun1 = function(){
+    // }
+    // //调用
+    // fun1()
+
+
+
+    /*****Function构造函数*******/
+    //    var fun1 = new Function('x','y',"return  x+y");
+    //    var num = fun1(1,2);
+    //    console.log(num);//3
+
+
+
+    /*****函数声明提升（函数调用可先于函数声明）*******/
+    //    fun1()
+    //    function fun1(){
+    //        console.log(1212);
+    //    }
+    //    //后声明的函数会覆盖先声明的函数
+    //    function fun1(){
+    //        console.log(1314);
+    //    }
+
+
+
+
+    /*******函数调用***********/
+    // 函数名+(
+    //函数声明
+    // function test1() {
+    //     alert(111)
+    // }
+    // //函数调用
+    // test1()
+
+
+
+    //  函数参数
+    /******实参：函数调用时的参数*******/
+    // function add(a, b) {
+    //     console.log(a + b)
+    // }
+    // add(1, 2)  //3
+
+
+
+    /***● 值传递：传递基本类型的值******/
+    // function add(num) {
+    //     num++
+    // }
+    // var a = 123
+    // add(a)
+    // console.log(a)    // a的值是多少？123
+
+
+    /***引用传递：传递引用类型的值******/
+    //   function add(num){
+    //       num[0]++
+    //   }
+    //   var arr = [11]
+    //   add(arr)
+    //   console.log(arr) // arr[0]的值是多少？[12]0: 12length: 1__proto__: Array(0)
+
+
+    // ● 函数的参数不是必须的
+    // ○ arguments是什么？
+    // ○ 如何使用arguments？
+    // function add() {
+    //     console.log(arguments)
+    //     return arguments[0] + arguments[1]
+    //     //Arguments(2) [11, 22, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+    // var num = add(11, 22)
+    // console.log(num) //33
+
+
+    // ● 立即执行函数
+    // (function () { })()
+    //     (function test() {
+    //         console.log(1111)
+    //     })()
+    //     // 或  (function(){}())
+    //     (function test() {
+    //         console.log(111)
+    //     }())
+
+
+    /***● 函数执行时所在的作用域，是定义时的作用域，不是调用时所在的作用域。***/
+    // function fun1() {
+    //     console.log(111)
+    // }
+    // function fun2() {
+    //     var a = 123
+    //     fun1()
+    // }
+    // fun2()    // ?111
+
+
+
+
+    /**************************/
+    //    属性和方法
+    // ● 属性的添加
+    // ● 属性的删除
+    // ● 自定义属性  Object.defineProperty()
+    // 属性的四个特征： 
+    // value : 属性的值
+    // configurable： 是否可删除
+    // writable：	是否可写
+    // enumerable： 是否可遍历
+    // var obj = {
+    //     name: "zhangsan",
+    //     age: 22,
+    //     email: "zhangsan@qq.com"
+    // }
+    // Object.defineProperty(obj, "sex", {
+    //     value: 'F',
+    //     configurable: true,
+    //     writable: true,
+    //     enumerable: true
+    // })
+    // console.log(obj)
+    //function1.html:154 {name: "zhangsan", age: 22, email: "zhangsan@qq.com", sex: "F"}
+
+
+    // 枚举对象
+    /******for in*********/
+    // var obj = {
+    //     name: "zhangsan",
+    //     age: 22,
+    //     email: "zhangsan@qq.com"
+    // }
+    // for (k in obj) {
+    //     console.log(k, obj[k])
+    // }//name zhangsan  age 22  email zhangsan@qq.com
+
+
+
+    /******Object.keys******/
+    var obj = {
+        name: "songzhipeng",
+        age: 18,
+        email: "songzhipeng@qq.com"
+    }
+    console.log(Object.keys(obj));
+      //["name", "age", "email"]0: "name"1: "age"2: "email"length: 3__proto__: Array(0)
+</script>

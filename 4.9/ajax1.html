@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../jquery-3.5.1.min.js"></script>
+</body>
+</html>
+<script>
+    $.ajax({
+             url:   'http://vue.api.comcto.com/api/password1.php'  ,   
+             type:   'post'  ,        //POST方式发送数据
+             async:   false  ,        //ajax同步
+            //  data:   params  ,
+             success: function(msg) {
+               console.log(msg)
+               console.log("第一位密码")
+             }
+         });
+         $.ajax({
+             url:   'http://vue.api.comcto.com/api/password2.php'  ,   
+             type:   'post'  ,        //POST方式发送数据
+             async:   false  ,        //ajax同步
+            //  data:   params  ,
+             success: function(msg) {
+               console.log(msg)
+               console.log("第二位密码")
+             }
+         });
+         $.ajax({
+             url:   'http://vue.api.comcto.com/api/password3.php'  ,   
+             type:   'post'  ,        //POST方式发送数据
+             async:   false  ,        //ajax同步
+            //  data:   params  ,
+             success: function(msg) {
+               console.log(msg)
+               console.log("第三位密码")
+             }
+         });
+         $.ajax({
+             url:   'http://vue.api.comcto.com/api/password4.php'  ,   
+             type:   'post'  ,        //POST方式发送数据
+             async:   false  ,        //ajax同步
+            //  data:   params  ,
+             success: function(msg) {
+               console.log(msg)
+               console.log("第四位密码")
+             }
+         });
+
+</script>

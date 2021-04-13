@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>axios请求接口获取后台数据</title>
+    <script src="./axios.min.js"></script>
+    <script src="./vue.2.6.12.js"></script>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #app {
+        width: 1200px;
+        margin: 100px auto;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 25px;
+    }
+
+    .book {
+        margin-top: 20px;
+    }
+
+    table {
+        margin: 30px 0 0 410px;
+    }
+
+    table tr:first-child {
+        background-color: peru;
+    }
+
+    tr td,
+    th {
+        width: 100px;
+        border: 1px dotted peru;
+    }
+
+    button {
+        /* background-color: pink; */
+        border: none;
+    }
+
+    .total {
+        margin-top: 20px;
+        background-color: orange;
+        width: 100px;
+        margin-left: 548px;
+    }
+</style>
+<body>
+<div id="app">
+    <div class="title">图书管理</div>
+    <div class="book">
+        <label for="id">编号：</label>
+        <input type="text" id="id" v-model='id' :disabled='flag' v-focus>
+        <label for="name">名称：</label>
+        <input type="text" id="name" v-model='name'>
+        <button @click='handle' :disabled='handleflag'>提交</button>
+    </div>
+    <table cellspacing="0">
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>时间</th>
+            <th>操作</th>
+        </tr>
+        <tr :key='item.id' v-for='item in books'>
+            <td v-cloak>{{item.id}}</td>
+            <td v-cloak>{{item.name}}</td>
+            <td v-cloak>{{item.date | format('yyyy-MM-dd')}}</td>
+            <td><button @click='edit(item.id)'>修改</button> | <button @click='del(item.id)'>删除</button></td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    // 定义一个带参数的过滤器
+    Vue.filter('format', function(value, arg) {
+        if (arg == 'yyyy-MM-dd') {
+            return value.getFullYear() + '-' + (value.getMonth() + 1) + '-' + value.getDate();
+        }
+    });
+    // 自定义全局指令`v-focus`
+    Vue.directive('focus', {
+        bind: function(el) {
+            // 只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置
+        },
+        //当被绑定的元素插入到 DOM 中时……
+        inserted: function(el) {
+            // 获得焦点
+            el.focus();
+        },
+        update: function() {
+            // 所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。
+        }
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            id: '',
+            name: '',
+            date: new Date(),
+            flag: false,
+            handleflag: false,
+            books: []
+        },
+        methods: {
+            handle: function() {
+                if (this.id == '' || this.name == '') {
+                    alert("请输入内容！！！");
+                } else if (this.flag) {
+                    //修改后重新提交
+                    this.books.some(item => {
+                        if (item.id == this.id) {
+                            item.name = this.name;
+                            item.date = this.date;
+                            //完成更新后终止循环遍历
+                            return true;
+                        };
+                    })
+                    this.flag = false;
+                } else {
+                    //添加图书
+                    var book = {};
+                    book.id = this.id;
+                    book.name = this.name;
+                    book.date = this.date;
+                    this.books.push(book);
+                }
+                this.id = '';
+                this.name = '';
+            },
+            edit: function(id) {
+                //禁止修改编号
+                this.flag = true;
+                //根据ID编辑数据
+                //点击修改后将数据填充到表单进行修改
+                var book = this.books.filter(function(item) {
+                    return item.id == id;
+                });
+                this.id = book[0].id;
+                this.name = book[0].name;
+            },
+            del: function(id) {
+                //删除图书
+                // 方法一：根据id从数组中查找元素的索引
+                // var index = this.books.findIndex(function(item) {
+                //     return item.id == id;
+                // });
+                // //根据索引删除数组元素
+                // this.books.splice(index, 1);
+                //方法二 通过数组的filter方法
+                this.books = this.books.filter(function(item) {
+                    return item.id != id;
+                });
+            }
+        },
+        computed: {
+            total: function() {
+                //利用计算属性统计书本的总量
+                return this.books.length;
+            }
+        },
+        watch: {
+            name: function(val) {
+                //验证图书是否存在
+                var flag = this.books.some(function(item) {
+                    return item.name == val;
+                });
+                if (flag) {
+                    this.handleflag = true;
+                } else {
+                    this.handleflag = false;
+                }
+            }
+        },
+        mounted: function() {
+            //该生命周期函数被触发的时候，模板已经可以使用
+            //一般此时用于获取后台数据，然后把数据填充到模板
+            var data = [{
+                id: 1,
+                name: '水浒传',
+                date: new Date()
+            }, {
+                id: 2,
+                name: '三国演义',
+                date: new Date()
+            }];
+            this.books = data;
+        }
+
+    })
+</script>
+</body>
+</html>

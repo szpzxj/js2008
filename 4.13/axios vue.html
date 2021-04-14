@@ -78,6 +78,8 @@
     </table>
 </div>
 
+</body>
+</html>
 <script>
     // 定义一个带参数的过滤器
     Vue.filter('format', function(value, arg) {
@@ -179,22 +181,6 @@
                 }
             }
         },
-        mounted: function() {
-            //该生命周期函数被触发的时候，模板已经可以使用
-            //一般此时用于获取后台数据，然后把数据填充到模板
-            var data = [{
-                id: 1,
-                name: '水浒传',
-                date: new Date()
-            }, {
-                id: 2,
-                name: '三国演义',
-                date: new Date()
-            }];
-            this.books = data;
-        }
 
     })
 </script>
-</body>
-</html>

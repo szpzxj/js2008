@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.2.6.12.js"></script>
+    <script src="../axios.min.js"></script>
+    <style>
+        .grid {
+            margin: auto;
+            width: 530px;
+            text-align: center;
+        }
+        .grid table {
+            border-top: 1px solid #C2D89A;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .grid th,
+        td {
+            padding: 10;
+            border: 1px dashed #F3DCAB;
+            height: 35px;
+            line-height: 35px;
+        }
+        .grid th {
+            background-color: #F3DCAB;
+        }
+        .grid .book {
+            padding-bottom: 10px;
+            padding-top: 5px;
+            background-color: #F3DCAB;
+        }
+        .grid .total {
+            height: 30px;
+            line-height: 30px;
+            background-color: #F3DCAB;
+            border-top: 1px solid #C2D89A;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="grid">
+            <div>
+                <!-- <button v-on:click="getList">请求接口数据</button> -->
+                <h1>图书管理</h1>
+                <div class="book">
+                    <div>
+                        <label for="id">
+                            编号：
+                        </label>
+                        <input type="text" id="id" v-model='id' :disabled="flag" v-focus>
+                        <label for="name">
+                            名称：
+                        </label>
+                        <input type="text" id="name" v-model='name'>
+                        <button @click='handle' :disabled="submitFlag">提交</button>
+                    </div>
+                </div>
+            </div>
+            <div class="total">
+                <span>图书总数：</span>
+                <span>{{total}}</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr :key='item.id' v-for='item in books'>
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.date | format('yyyy-MM-dd hh:mm:ss')}}</td>
+                        <td>
+                            <a href="" @click.prevent='toEdit(item.id)'>修改</a>
+                            <span>|</span>
+                            <a href="" @click.prevent='deleteBook(item.id)'>删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    //接口地址
+    const api_url = "http://vue.api.comcto.com/api/books.php"
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            books: []
+        },
+        methods: {
+        },
+        created() {
+            let self = this
+            axios.get("api_url").then(function (response) {
+                // console.log(response.data)
+                self.books = response.data
+            })
+        }
+    })
+</script>

@@ -8,19 +8,18 @@
 </head>
 <body>
     <div id="app">
-    <button-counter></button-counter>
+        <button-counter></button-counter>
     </div>
 </body>
 </html>
 <script>
-    //创建组件
     Vue.component('button-counter',{
         data:function(){
             return{
                 counter:123
             }
         },
-        // template:"<button v-bind:title='counter'> {{counter}} </button>"
+        // template:"<button v-bind:title='counter'> {{counter}} </button>"
         template:"<button v-on:click='add'> {{counter}} </button>",
         methods:{
             add(){
@@ -28,11 +27,10 @@
             }
         }
     })
-
     new Vue({
         el:"#app",
         methods:{
-
         }
     })
 </script>
+

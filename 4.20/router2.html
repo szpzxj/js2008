@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.2.6.12.js"></script>
+    <script src="../js/vue-router.js"></script>
+</head> 
+<body>
+    <div id="app">
+        <router-link to="/user/reg">注册</router-link>
+        <router-link to="/user/login">登录</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script>
+    const UserLogin = {
+        template:`<div><h3>用户登录</h3></div>`
+    }
+    const UserReg = {
+        template:`<div><h3>用户注册</h3>
+        <router-link to="/reg/mobile" >手机注册</router-link>
+        <router-link to="/reg/email">Email注册</router-link>
+        <router-view></router-view>
+        </div>`
+    }
+
+    //手机注册
+    const RegMobile = {
+        template:`<div><input type="text" placeholder="请输入手机号"></div>`
+    }
+    const RegEmail = {
+        template:`<div><input type="text" placeholder="请输入Email"></div>`
+    }
+
+    //规则映射
+    const routes = [
+        {path:"/user/login",component:UserLogin},
+        {path:"/user/reg",component:UserReg,
+        children:[
+            {path:"/reg/mobile",component:RegMobile},
+            {path:"/reg/email",component:RegEmail},
+        ]},
+    ]
+    const router = new VueRouter({routes})
+    new Vue({
+        el:"#app",
+        router:router
+    })
+</script>

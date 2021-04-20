@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.2.6.12.js"></script>
+    <script src="../js/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/user/1">王铭</router-link>
+        <router-link to="/user/2">宋志鹏</router-link>
+        <router-link to="/user/3">小宗</router-link>
+
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script>
+    //方法一
+    // const User1 = {
+    //     template:`<div>王铭的信息</div>`
+    // }
+    // const User2 = {
+    //     template:`<div>宋志鹏的信息</div>`
+    // }
+    // const User3 = {
+    //     template:`<div>小宗的信息</div>`
+    // }
+
+        // 方法二
+        const UserX = {
+            props:['id','name','age'],
+        template:`<div>{{id}} - {{age}}- {{name}}  的个人信息</div>`
+    }
+
+    //定义规则（路由与组件的映射关系）
+    const routes = [
+        // 方法一
+    // {path:"/",redirect:"/user/1"},
+    // {path:"/user/1",component:User1},
+    // {path:"/user/2",component:User2},
+    // {path:"/user/3",component:User3},
+    // 方法二
+        {path:"/user/:id",component:UserX,
+        props:route=>({id:route.params.id,age:18,name:"songzhipeng"})
+        },
+    ]
+
+    //实例化 VueRouter
+    const router = new VueRouter({
+        routes:routes
+    })
+    new Vue({
+        el:"#app",
+        router:router,
+        // data:{}
+        // methods:{}
+        // components:{}
+        // watch:{}
+        // computed:{}
+        // created(){}
+        // mounted(){}
+        // template:``
+    })
+</script>

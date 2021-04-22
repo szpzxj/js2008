@@ -136,6 +136,7 @@
       }
       
   //定义组件
+  //用户管理
   const Users = {
     data(){
           return{
@@ -156,7 +157,7 @@
             <td>{{item.mobile}}</td>
             <td>
               <a href="javascript:;" @click="goDetail(item.user_id)">详情</a> |
-              <a href="javascript:;">删除</a> |
+              <a href="javascript:;" @click="deleteUser(item.user_id)">删除</a> |
               <router-link :to="{path:'/edit/'+item.user_id}">编辑</router-link>
             </td>
           </tr>
@@ -169,7 +170,7 @@
       methods:{
         getUserList(){
           let self = this
-          axios.get("http://api.2008.com:8080/user/list").then(function(res){
+          axios.get("http://api.2008.com/user/list").then(function(res){
             self.userList = res.data
           })
         },
@@ -178,17 +179,52 @@
           //切换路由
           this.$router.push("/userDetail"+userid)
         },
+        //删除用户
+        deleteUser(uid){
+          console.log(uid)
+          //请求接口
+          let self = this
+          axios.get("http://api.2008.com/user/delete?uid="+uid).then(function(res){
+            console.log("删除用户")
+          console.log(res.data)
+          self.$parent.getUserList() //调用父级用户接口
+          })
+        },
       }
   }
+    //权限管理
   const Privs= {
     template:`<div><h3>权限管理</h3></div>`
   }
+  //商品管理
   const Goods = {
-    template:`<div><h3>商品管理</h3></div>`
+    data(){
+          return{
+            goodsList:[]
+          }
+        },
+    template:`<div><h3>商品管理</h3>
+      <router-view :key="new Date().getMilliseconds()"></router-view>
+        <table>
+          <thead>
+          <tr><th>编号</th><th>商品名</th><th>商品型号</th><th>价格</th></tr>
+          </thead>
+          <tbody>
+          <tr v-for="(item,key) in goodsList" :key="item.cat_id">
+            <td>{{item.cat_id}}</td>
+            <td>{{item.goods_name}}</td>
+            <td>{{item.goods_number}}</td>
+            <td>{{item.shop_price}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>`,
   }
+  //订单管理
   const Orders = {
     template:`<div><h3>订单管理</h3></div>`
   }
+  //系统设置
   const Settings = { 
     template:`<div><h3>系统设置</h3></div>`
   }
@@ -207,10 +243,8 @@
       }
     }
   }
-
-
  //编辑用户
- const EditUser = {
+  const EditUser = {
         props:['uid'],
         data(){
           return {
@@ -230,7 +264,7 @@
         `,
         mounted(){
           let self = this
-          axios.get("http://api.2008.com:8080/user/detail?uid="+this.uid).then(function(res){
+          axios.get("http://api.2008.com/user/detail?uid="+this.uid).then(function(res){
             self.userinfo = res.data.data.u
           })
         },
@@ -238,20 +272,18 @@
           updateUser(){
             let self = this
             console.log(this.userinfo)
-            axios.post("http://api.2008.com:8080/user/update",this.userinfo).then(function(res){
-              console.log(res)
+            axios.post("http://api.2008.com/user/update",this.userinfo).then(function(res){
+              console.log(res.data)
+              //调用父组件的 获取用户列表接口
               self.$parent.getUserList()
-              //self.$router.push('/users')
             })
           },
+          //返回列表页
           goBack(){   //返回
             this.$router.push('/users')
           }
         },
       }
-
-
-  
   //路由规则
   const routes = [
     {path:"/",component:App,children:[

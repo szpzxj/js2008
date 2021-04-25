@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Math.random()
+        // Math.abs()
+
+        // //使用面向对象的形式，实现一个计算器的对象
+        var a = 100;
+        var b = 200;
+
+        // var res = Cacl.add(a, b);
+        // Cacl.minus(a, b);
+        // Cacl.multi(a, b);
+        // Cacl.divi(a, b);
+        var Cacl2 = {
+            add:function(a,b){
+                return a+b;
+            },
+            minus:function(a,b){
+                return a-b;
+            },
+            multi:function(a,b){
+                return a*b;
+            },
+            divi:function(a,b){
+                return a/b;
+            }
+        };
+        console.log(Cacl2.add(a,b));
+        console.log(Cacl2.minus(a,b));
+        console.log(Cacl2.multi(a,b));
+        console.log(Cacl2.divi(a,b));
+    </script>
+</body>
+
+</html>

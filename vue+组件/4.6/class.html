@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // JavaScript 语言中，生成实例对象的传统方法是通过构造函数。下面是一个例子。
+        // function Point(x, y) {
+        //     this.x = x;
+        //     this.y = y;
+        // }
+        // Point.prototype.toString = function () {
+        //     return '(' + this.x + ', ' + this.y + ')';
+        // };
+        // var p = new Point(1, 2);
+        // console.log(p);//Point
+
+
+
+
+        //   function Person1(){
+        //   }
+        //   Person1.prototype.name = "noname";
+        //   Person1.prototype.sex ="保密";
+        //   Person1.prototype.age = 0;
+        //   Person1.prototype.say = function(){
+        //       console.log("Hello World");
+        //   }
+        //   var p1 = new Person1();
+        //   console.log(p1.name);//noname
+        //   console.log(p1.sex);//保密
+        //   console.log(p1.age);//0
+        //   p1.say();//Hello World
+        // class Person2{
+        // }
+        // let p2 = new Person2();
+        // let p3 = new Person2();
+        // console.log(p1);//Person1 {}
+        // console.log(p2);//Person2 {}
+        // console.log(p3);//Person3 {}
+
+
+
+         //定义一个人类Persin2
+        class Person2{
+            //构造方法 实例化时自动调用  完成一些初始化的任务
+            constructor(name,age,sex){
+                this.name = name
+                this.age = age
+                this.sex = sex
+            }
+            say(){
+                console.log(this.name + "正在说话");
+            }
+            //访问器函数  访问name属性时调用
+            get naem(){
+                console.log("访问了name属性")
+            }
+            set name(v){
+                console.log("修改了name属性的值:"+v);
+            }
+        }
+        
+        let p1 = new Person2("songzhipeng",19,"M");
+        let p2 = new Person2("zongxijing",18,"F");
+        p1.name
+        p1.name = "wangming";
+    </script>
+</body>
+</html>

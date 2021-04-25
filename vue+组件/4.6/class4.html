@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // //定义一个人类Persin
+        // class Person {
+        //     static location = "Beijing"
+        //     //构造方法 实例化时自动调用  完成一些初始化的任务
+        //     constructor(name, age, sex) {
+        //         this.name = name
+        //         this.age = age
+        //         this.sex = sex
+        //     }
+        //     say() {
+        //         console.log(this.name + "正在说话");
+        //     }
+        //     static cry() {
+        //         console.log("正在哭")
+        //     }
+        // }
+        // // Person.cry(); //类名.静态属性（方法）//正在哭
+        // // console.log(Person.location)//访问类的静态属性//Beijing
+
+        // //声明一个子类Asian 继承父类Person
+        // class Asian extends Person {
+        //     constructor(name,age,sex){
+        //         super(name,age,sex)
+        // }
+        //   cry(){
+        //       console.log(this.name + "正在哭");
+        //   }
+        // }
+        // let p1 = new Asian("王铭",17,"F");
+        // console.log(p1);//Asian {name: "王铭", age: 17, sex: "F"}
+        // p1.say();//王铭正在说
+        // p1.cry();//王铭正在哭
+
+
+
+
+        //定义一个人类Persin
+        class Person {
+            static location = "Beijing"
+            //构造方法 实例化时自动调用  完成一些初始化的任务
+            constructor(name, age, sex) {
+                this.name = name
+                this.age = age
+                this.sex = sex
+            }
+            say() {
+                console.log(this.name + "在拉屎并且还在吃");
+            }
+            static cry() {
+                console.log("正在哭")
+            }
+        }
+        // Person.cry(); //类名.静态属性（方法）//正在哭
+        // console.log(Person.location)//访问类的静态属性//Beijing
+
+        //声明一个子类Asian 继承父类Person
+        class Asian extends Person {
+            constructor(name, age, sex) {
+                super(name, age, sex)
+            }
+            cry() {
+                console.log(this.name + "正在哭");
+            }
+        }
+        //定义一个类
+        class Chinese extends Asian {
+
+        }
+        let p1 = new Chinese("宋志鹏", 18, "M");
+         console.log(p1);//Chinese {name: "宋志鹏", age: 18, sex: "M"}
+         p1.say()//宋志鹏在拉屎并且还在吃
+         p1.cry() //宋志鹏正在哭
+    </script>
+</body>
+
+</html>

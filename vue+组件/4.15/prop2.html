@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.2.6.12.js"></script>
+</head>
+<body>
+    <div id="app">
+        <book-list v-bind:booklist="list"></book-list>
+    </div>
+</body>
+</html>
+
+<script>
+    Vue.component("book-list",{
+        props:['booklist'],
+        template:`<ul><li v-for="item in booklist">{{item.id}}--{{item.name}}</li></ul>`
+    })    
+    new Vue({
+        el:"#app",
+        data:{
+            list:[
+                {
+                    id:1,
+                    name:"王铭🐇"
+                },
+                {
+                    id:2,
+                    name:"小宗✌"
+                },
+                {
+                    id:3,
+                    name:"宋志鹏🐖"
+                },
+                {
+                    id:4,
+                    name:"胡莹飞😘（楼下是🐢）"
+                },
+                {
+                    id:5,
+                    name:"张脉🐢（🐢🐢🐢）"
+                },
+                {
+                    id:6,
+                    name:"付苏慧😘（楼上是🐢）"
+                },
+            ]
+        }
+    })
+</script>

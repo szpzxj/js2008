@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 使用var声明的变量与使用let声明的变量
+        // console.log(window.a)
+        // var a = 123
+        // console.log(window.a)
+        // console.log(window.b)
+        // let b = 234
+        // console.log(window.b)
+
+
+        //数组赋值
+        // let [a, b, c] = [11, 22, 33]
+        // console.log(a)//11
+        // console.log(b)//22
+        // console.log(c)//33
+
+
+        // //对象赋值
+        // let json_obj = {
+        //     name: "zhangsan",
+        //     age: 22,
+        //     email: "zhangsan@qq.com"
+        // }
+        // //使用与对象属性名一致的变量名
+        // let { name, age, email } = json_obj
+        // console.log(name, age, email)//hangsan 22 zhangsan@qq.com
+        // //使用别名
+        // let { name: n, age: a, email: e } = json_obj
+        // console.log(n, a, e)//hangsan 22 zhangsan@qq.com
+
+
+        //   中文编码GB2312
+        // let str1 = "𠌑𠌒傻𠌔瓜𠌕𠌖"
+        // let str2 = "我爱北京天安门"
+        // console.log(str1.length)//12
+        // console.log(str2.length)//7
+        // console.log(str1[0])
+        // console.log(str2[0])//我
+
+
+        // 使用方式： 反引号``
+        // 在模板字符串中可解析变量、计算、调用函数
+        // let name = "zhangsan"
+        // let age1 = 22
+        // let age2 = 33
+        // //使用  反引号 ``
+        // let str = `姓名：${name},年龄：${age1}`
+        // console.log(str)   // 姓名：zhangsan,年龄：22
+        // let str2 = `a: ${age1 + age2},b: ${age1 - age2}`
+        // console.log(str2)    // a: 55,b: -11
+
+
+        //  indexOf|lastlndexOf()
+        // var str1 = "Hello World";
+        // console.log(str1.indexOf("o"))//4
+        // console.log(str1.lastIndexOf("o"))//7
+
+
+        // includes()|startsWith()|endsWith()
+        // includes() //：返回布尔值，表示是否找到了参数字符串。
+        // startsWith() //：返回布尔值，表示参数字符串是否在原字符串的头部。
+        // endsWith() //：返回布尔值，表示参数字符串是否在原字符串的尾部。
+
+
+        //   repeat()//返回一个字符串，表示将原字符串重复n次。
+        // 'x'.repeat(3)//"xxx"
+        // 'hello'.repeat(2)//"hellohello"
+        // 'na'.repeat(0)//""
+
+
+        // padStart()|padEnd()
+        //padStart()用于头部补全
+        //padEnd()用于尾部补全
+
+
+        // trimStart()|trimEnd()
+        //trimStart()消除字符串头部的空格
+        // trimEnd()消除尾部的空格
+    </script>
+</body>
+
+</html>

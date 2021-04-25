@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function animal(){
+
+    }
+    animal.prototype.name='animals'
+    animal.prototype.head='yige'
+//    animal=new animal()
+//    console.log(animal)
+    function cat() {
+
+    }
+    cat.prototype=new animal()
+    cat.prototype.catt='cat'
+//    cat=new cat()
+//    console.log(cat)
+    function tiger() {
+
+    }
+    var p1=tiger.prototype=new cat()
+//    var p1=new tiger()
+    console.log(p1)
+</script>
+</body>
+</html>
